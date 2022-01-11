@@ -1,0 +1,287 @@
+﻿@model Flower
+@{
+    ViewData["Title"] = "Index";
+}
+<section id="shopproductNameLis">
+    <div class="container">
+        <div class="row">
+            <h1>
+                Product List
+            </h1>
+            <p>
+                Where flowers are our inspiration
+            </p>
+        </div>
+    </div>
+</section>
+<section id="shopOrangeAmaryllis">
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="shopAmeryllisImages d-flex col-lg-6 col">
+                <div class="smallImages col">
+                    @foreach (FlowerImage flowerImage in Model.FlowerImages.Where(fi => fi.IsMain == false).ToList())
+                    {
+                        <div class="image "><img src="~/assets/images/@flowerImage.Image" alt=""></div>
+                    }
+                </div>
+                <div class="bigImage">
+                    <img src="~/assets/images/@Model.FlowerImages.FirstOrDefault(fi=>fi.IsMain==true).Image" alt="">
+                </div>
+            </div>
+            <div class="shopAmeryllisInfo col-lg-6 col">
+                <div class="title">
+                    <h2>@Model.Name</h2>
+                    @if (Model.CampaignId == null)
+                    {
+                        <p>@Model.Price$</p>
+                    }
+                    else
+                    {
+                        <p style="text-decoration:line-through">@Model.Price$</p>
+                        <span>@(Model.Price*(100-Model.Campaigns.DiscountPercent)/100)$</span>
+                    }
+                </div>
+                <div class="desc">
+                    <p>
+                        @Model.Description
+                    </p>
+                </div>
+                <div class="quantityButton">
+                    <div class="quantity d-flex justify-content-around align-items-center">
+                        <span>Quantity</span>
+                        <div class="icon-number">
+                            <span id="plMinus"><i class="fas fa-caret-left"></i></span>
+                            <span id="plproductCount">1</span>
+                            <span id="plPlus"><i class="fas fa-caret-right"></i></span>
+                        </div>
+                    </div>
+                    <button type="submit">Add to Cart</button>
+                </div>
+                <div style="margin-top: 5%; line-height: 2;" class="tagsCategories">
+                    <span>SKU:</span> <span style="color: grey;">@Model.FlowerCode </span><br>
+                    <span>Categories:</span> <span style="color: grey;">
+                        @foreach (FlowerCategory flowerCategory in Model.FlowerCategories)
+                        {
+                            <span>
+                                @flowerCategory.Category.Name
+                            </span>
+                        }
+                    </span> <br>
+                    <span>Tags:</span> <span style="color: grey;">
+                        @foreach (FlowerTag flowerTag in Model.FlowerTags)
+                        {
+                            <span>
+                                @flowerTag.Tag.Name
+                            </span>
+                        }
+                    </span><br>
+                    <span style="color:@(Model.InStock ? "Green":"Red")">
+                        @(Model.InStock ? "Available":"Not Available")
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="shopDesc-info-review">
+    <div class="shopTitle">
+        <div class="container">
+            <div class="row">
+                <div class="shopDescription myCart tabActive col-lg-2" data-id="description">DESCRIPTION</div>
+                <div class="shopInfo myCart col-lg-3" data-id="information">ADDITIONAL INFORMATION</div>
+                <div class="shopReview myCart col-lg-2" data-id="reviews">REVIEWS</div>
+            </div>
+        </div>
+    </div>
+    <div class="shopDesc tab" id="description">
+        <div class="container">
+            <div class="row">
+                <div class="descCart shopActive col-lg-12">
+                    <div class="descTitle">
+                        <h2>The power of flowers</h2>
+                    </div>
+                    <div class="innerDesc">
+                        <p>
+                            Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra
+                            nulla ut
+                            metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel
+                            augue.
+                            Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus,
+                            tellus
+                            eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed
+                            ipsum.
+                            Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio
+                            et ante
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="shopInfo tab d-none" id="information">
+        <div class="container">
+            <div class="row">
+                <div class="infoCart">
+                    <div class="infoTitleDesc">
+                        <span style="font-size: 14px; font-weight: bold;">
+                            Weight: <span style="color: grey; font-size: 12px;">@Model.Weight</span>
+                        </span> <br>
+                        <span style="font-size: 14px; font-weight: bold;">
+                            Dimensions: <span style="color: grey; font-size: 12px;">@Model.Dimension cm</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shopReview tab  d-none" id="reviews">
+        <div class="container">
+            <div class="row">
+                <div class="rewievCart">
+                    <div class="reviews">
+                        <div class="title">
+                            <h2 style="font-size: 29px; padding-top: 5%; font-family: 'Times New Roman', Times, serif;">
+                                Reviews
+                            </h2>
+                        </div>
+                        <div style="margin-top: 4%;" class="content d-flex">
+                            <div class="image">
+                                <img style="width: 70px; height: 70px;" src="~/assets/images/review1.png"
+                                     alt="">
+                            </div>
+                            <div style="margin-left: 20px;" class="info">
+                                <div style="padding-bottom: 8px;" class="name">
+                                    <span> Joshua Garcia</span> <span style="color: grey; font-size: 11px; padding-left: 10px;">27.04.2018</span>
+                                </div>
+                                <div style="padding-top: 10px;" class="desc">
+                                    <p style="color: grey;">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing
+                                        elit. Aenean commodo
+                                        ligula eget dolor. Aenean massa. Cum sociis Theme natoque penatibus et
+                                        magnis dis parturient montes, nascetur ridiculus mus.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 4%;" class="content d-flex">
+                            <div class="image">
+                                <img style="width: 70px; height: 70px;" src="~/assets/images/review2.png"
+                                     alt="">
+                            </div>
+                            <div style="margin-left: 20px;" class="info">
+                                <div style="padding-bottom: 8px;" class="name">
+                                    <span> JOAN STANLEY </span> <span style="color: grey; font-size: 11px; padding-left: 10px;">27.04.2018</span>
+                                </div>
+                                <div style="padding-top: 10px;" class="desc">
+                                    <p style="color: grey;">
+                                        Etiam rhoncus. Maecenas tempus, tellus eget
+                                        condimentum rhoncus, sem quam
+                                        semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc,
+                                        blandit vel, luctus pulvinar, hendrerit
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 3%;" class="createReview">
+                        <div class="title ">
+                            <h2>Add a review</h2>
+                            <p style="color: grey; font-size: 13px;">
+                                Your email address will not be published.
+                                Required fields are marked *
+                            </p>
+                        </div>
+                        <div class="registration">
+                            <form action="">
+                                <label style="margin-bottom:10px; color: grey; font-size: 12px;" for="txt">
+                                    Your
+                                    review*
+                                </label><br>
+                                <textarea style="width: 100%;" name="" id="txt" cols="150" rows="8"
+                                          required></textarea>
+                                <label style="color: grey; font-size: 12px;" for="name">Name *</label><br>
+                                <input style="width: 100%; height: 50px;" type="text" id="name"
+                                       required><br><br>
+                                <label style="color: grey; font-size: 12px;" for="mail">Email *</label><br>
+                                <input style="width: 100%; height: 50px;" type="email" id="mail"
+                                       required><br><br>
+                                <input type="checkbox" name="" id="">
+                                <p style="color: grey;">
+                                    Save my name, email, and website in this browser for the
+                                    next time I comment.
+                                </p>
+                                <button type="submit">Submit</button>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="shopRelatedProducts">
+    <div class="container">
+        <div class="row">
+            <h3>RELATED PRODUCTS</h3>
+            <div class="products d-flex justify-content-between">
+                <div class="product col col-lg-3 col-md-6 col-sm-12">
+                    <div class="image"><img src="~/assets/images/producthover1.jpg" alt=""></div>
+                    <div class="productName">
+                        SWEET ALYSSUM
+                    </div>
+                    <div class="productPrice  d-flex justify-content-center">
+                        <div class="addToCard d-flex justify-content-center">
+                            <div class="text"><span>Add to cart</span></div>
+                            <div class="price"><span>259$</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product col col-lg-3 col-md-6 col-sm-12">
+                    <div class="image"><img src="~/assets/images/producthover2.jpg" alt=""></div>
+                    <div class="productName">
+                        SWEET ALYSSUM
+                    </div>
+                    <div class="productPrice  d-flex justify-content-center">
+                        <div class="addToCard d-flex justify-content-center">
+                            <div class="text"><span>Add to cart</span></div>
+                            <div class="price"><span>259$</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product col col-lg-3 col-md-6 col-sm-12">
+                    <div class="image"><img src="~/assets/images/producthover3.jpg" alt=""></div>
+                    <div class="productName">
+                        SWEET ALYSSUM
+                    </div>
+                    <div class="productPrice  d-flex justify-content-center">
+                        <div class="addToCard d-flex justify-content-center">
+                            <div class="text"><span>Add to cart</span></div>
+                            <div class="price"><span>259$</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product col col-lg-3 col-md-6 col-sm-12">
+                    <div class="image"><img src="~/assets/images/producthover4.jpg" alt=""></div>
+                    <div class="productName">
+                        SWEET ALYSSUM
+                    </div>
+                    <div class="productPrice  d-flex justify-content-center">
+                        <div class="addToCard d-flex justify-content-center">
+                            <div class="text"><span>Add to cart</span></div>
+                            <div class="price"><span>259$</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/assets/Js/productList.js"></script>
+}

@@ -1,0 +1,276 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model HomeVM
+
+<section id="flowers3">
+    <div class="imagesSlide">
+        <div class="imgScale">
+            <i class="bi bi-arrow-right clickright"></i>
+            <i class="bi bi-arrow-left clickleft"></i>
+            <img id="loop" src="~/assets/images/h3-slider-background-2.jpg" alt="">
+        </div>
+    </div>
+    <div class="flowersInfo">
+        <div class="Infos">
+            <div class="titleInfo">
+                <span>Send</span><span>flowers</span><span>like</span><br>
+                <span>you mean it.</span>
+            </div>
+            <div class="descInfo">
+                <p>
+                    Where flowers are our inspiration to create lasting <br> memories. Whatever the occasion, our
+                    flowers will <br> make it special cursus a sit amet mauris.
+                </p>
+            </div>
+        </div>
+
+        <div class="signatureInfo">
+            <img src="~/assets/images/h2-sign-img.png" alt="">
+
+        </div>
+    </div>
+</section>
+<section id="productList">
+    <div class="container">
+        <div class="row">
+            <div class="title-filter d-flex justify-content-between">
+                <div class="productTitle col-lg-10">
+                    <p id="productListCategory">Categories</p>
+                    <div id="dropDownCategory">
+                        <ul class="flowerTypes">
+                            <li><a class="types" data-id="all" href="#">ALL</a></li>
+                            @foreach (Category category  in Model.Categories)
+                            {
+                                <li><a class="types" data-id="@category.Name.ToLower()" href="#">@category.Name.ToUpper()</a></li>
+
+                            }
+                        </ul>
+                    </div>
+                    <ul class="flowerTypes col-lg-6 d-flex justify-content-around">
+                        <li><a class="types" data-id="all" href="#">ALL</a></li>
+                        @foreach (Category categ in Model.Categories)
+                        {
+                            <li><a class="types" data-id="@categ.Name.ToLower()" href="#">@categ.Name.ToUpper()</a></li>
+
+                        }
+                    </ul>
+                </div>
+                <div class="filter col-lg-2">
+                    <div class="filter-icon d-flex justify-content-end">
+                        <span>Filter</span>
+                        <i class="fas fa-caret-down mx-2"></i>
+                    </div>
+                </div>
+
+            </div>
+            <div class="products d-flex flex-wrap ">
+                @await Html.PartialAsync("_PartialView")
+            </div>
+        </div>
+    </div>
+</section>
+<section id="video">
+    <div class="container">
+        <div class="row">
+            <div class="video-article d-flex justify-content-aroundcol-lg-12">
+                <div class="videoImg col-lg-7">
+                    <div class="icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <img src="~/assets/images/h3-video-img.jpg" alt="">
+                </div>
+                <div class="article col-lg-5">
+                    <div class="title">
+                        <h5>
+                            Suprise Your <span>Valentine!</span> <br>
+                            Let us arrange a smile.
+                        </h5>
+                    </div>
+                    <div class="desc">
+                        Where flowers are our inspiration to create lasting memories. Whatever the occasion...
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <li>
+                                <span><img src="~/assets/images/h1-custom-icon.png" alt=""></span> <span>
+                                    Hand
+                                    picked just for you.
+                                </span>
+                            </li>
+                            <li>
+                                <span><img src="~/assets/images/h1-custom-icon.png" alt=""></span> <span>
+                                    Unique
+                                    flower arrangements
+                                </span>
+                            </li>
+                            <li>
+                                <span><img src="~/assets/images/h1-custom-icon.png" alt=""></span> <span>
+                                    Best
+                                    way to say you care.
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section id="flowerExpert">
+    <div class="container">
+        <div class="row">
+            <div class="info-experts col-lg-12 col-md-12 col-sm-12">
+                <div class="info col-sm-12 col-md-12">
+                    <div class="title">
+                        <h2>Flower Experts</h2>
+                    </div>
+                    <div class="desc">
+                        A perfect blend of creativity, energy, communication, happiness and love.
+                        Let us <br> arrange a smile for you.
+                    </div>
+                </div>
+                <div class="experts  col-lg-12 d-flex justify-content-between">
+                    @foreach (var prof in Model.professions)
+                    {
+                        @foreach (var exp in prof.Experts)
+                        {
+                            <div class="expert col-lg-3 col-sm-12 col-md-6 ">
+                                <div class="expImage"><img src="~/assets/images/@exp.Image" alt=""></div>
+                                <div class="expName">@exp.Name</div>
+                                <div class="expProfession">@prof.Name</div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@foreach (var item in Model.settings)
+{
+    <section id="myParallax">
+        <div class="parallaxClass parallax-window d-flex justify-content-center align-items-center flex-column "
+             data-parallax="scroll" data-image-src="../assets/images/@item.ParallaxImage">
+            <div class="parallaxText">
+                <h2>Join The Colorful Bunch!</h2>
+            </div>
+            <div class="registration d-flex ">
+                <label for=""></label>
+                <input type="email" placeholder="Email Address">
+                <button type="reset">SUBSCRIBE</button>
+            </div>
+        </div>
+
+    </section>
+}
+<section id="blog">
+    <div class="container">
+        <div class="row">
+            <div class="blogArticle text-center">
+                <div class="blogTitle">
+                    <h2>From our Blog</h2>
+                </div>
+                <div class="blogDesc">
+                    <p>
+                        A perfect blend of creativity, energy, communication, happiness and love. Let us <br>
+                        arrange a smile for you.
+                    </p>
+                </div>
+            </div>
+            <div class="blogImages d-flex justify-content-around  col-lg-12">
+                <div class="blogImage col-lg-4">
+                    <div class="image">
+                        <div class="date"><span> 27.04.2018</span></div>
+                        <img src="~/assets/images/blogimage1.jpg" alt="">
+
+                    </div>
+                    <div class="imageName">Flower Power</div>
+                    <div class="imageDesc">
+                        <p>Class aptent taciti sociosqu ad litora torquent per <br> conubia nostra, per</p>
+                    </div>
+
+                </div>
+                <div class="blogImage col-lg-4">
+                    <div class="image">
+                        <div class="date"><span>03.05.2018</span> </div> <img src="~/assets/images/blog2.jpg"
+                                                                              alt="">
+
+                    </div>
+                    <div class="imageName">Local Florists</div>
+                    <div class="imageDesc">
+                        <p>Class aptent taciti sociosqu ad litora torquent per <br> conubia nostra, per</p>
+                    </div>
+
+                </div>
+                <div class="blogImage col-lg-4">
+                    <div class="image">
+                        <div class="date"><span>03.05.2018</span></div> <img src="~/assets/images/blog-feature-img-4.jpg" alt="">
+
+                    </div>
+                    <div class="imageName">Flower Beauty </div>
+                    <div class="imageDesc">
+                        <p>Class aptent taciti sociosqu ad litora torquent per <br> conubia nostra, per</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="slider">
+    <div class="owl-carousel owl-theme">
+        <div class="item">
+            <div class="container">
+                <div class="row">
+                    <div class="sliderInfosImage d-flex justify-content-center ">
+                        <div class="innerSliderInfosImage">
+                            <div class="sliderImage d-flex justify-content-center">
+                                <img style="width: 22%;" src="~/assets/images/testimonial-img-1.png" alt="">
+                            </div>
+                            <div class="sliderinfos ">
+                                <div style="color: grey; font-size: 20px;" class="desc text-center mt-1">
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <br> Aenean
+                                    commodo ligula eget.
+                                </div>
+                                <div class="sliderName text-center mt-3">
+                                    <h5>Jasmine White</h5>
+                                </div>
+                                <div class="sliderProfession text-center">
+                                    <p>Florist</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="container">
+                <div class="row">
+                    <div class="sliderInfosImage d-flex justify-content-center ">
+                        <div class="innerSliderInfosImage">
+                            <div class="sliderImage d-flex justify-content-center">
+                                <img style="width: 22%;" src="~/assets/images/sliderImg2.png" alt="">
+                            </div>
+                            <div class="sliderinfos ">
+                                <div style="color: grey; font-size: 20px;" class="desc text-center mt-1">
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <br> Aenean
+                                    commodo ligula eget.
+                                </div>
+                                <div class="sliderName text-center mt-3">
+                                    <h5>Jasmine White</h5>
+                                </div>
+                                <div class="sliderProfession text-center">
+                                    <p>Florist</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

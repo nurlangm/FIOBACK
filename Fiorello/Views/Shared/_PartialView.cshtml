@@ -1,0 +1,40 @@
+﻿
+@foreach (Flower flower in Model.Flowers)
+{
+<a style="text-decoration:none;color:black;" asp-controller="flower" asp-action="details" asp-route-id="@flower.Id" class="product all  @foreach (FlowerCategory flowerCategory in flower.FlowerCategories)
+                        {
+                        @(flowerCategory.Category.Name.ToLower()+" ")
+                        }
+                        " data-id="@flower.Id">
+    <div>
+        <div class="image">
+            @foreach (FlowerImage flowerImage in flower.FlowerImages)
+            {
+                @if (flowerImage.IsMain == true)
+                {
+                    <img src="~/assets/images/@flowerImage.Image" alt="">
+                }
+            }
+        </div>
+        <div class="productName">
+            @flower.Name
+        </div>
+        <div class="productPrice cart-container d-flex justify-content-center">
+            <div class="addToCart d-flex justify-content-center">
+                @if (flower.CampaignId == null)
+                {
+                    <div class="text"><span>Add to cart</span></div>
+                    <div class="price"><span style="font-size: 12px;">@flower.Price</span><span>$</span></div>
+                }
+                else
+                {
+                    <div style="margin-left:25px" class="text"><span>Add to cart</span></div>
+                    <div class="price">
+                        <span style="font-size: 12px;">@(flower.Price*(100-flower.Campaigns.DiscountPercent)/100)</span><span>$</span><del style="margin-left:8px">@flower.Price$</del>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</a>
+}
